@@ -1,1 +1,1 @@
-# LeaguePrediciton
+# LeaguePrediction
