@@ -28,8 +28,9 @@ class Summoner:
 
 class Match:
 
-    def __init__(self, summoner1, summoner2, summoner3, summoner4,
+    def __init__(self, match_id, summoner1, summoner2, summoner3, summoner4,
                  summoner5, summoner6, summoner7, summoner8, summoner9, summoner10, win):
+        self.match_id = match_id  # unique match id
         self.summoner1 = summoner1  # game participants
         self.summoner2 = summoner2
         self.summoner3 = summoner3
@@ -43,9 +44,9 @@ class Match:
         self.win = win  # summoner 1-5 game won?
 
     def to_string(self):
-        res = '{ "Summoner1":' + self.summoner1.to_string() + ', "Summoner2":' + self.summoner2.to_string() \
-               + ', "Summoner3":' + self.summoner3.to_string() + ', "Summoner4":' + self.summoner4.to_string() \
-               + ', "Summoner5":' + self.summoner5.to_string() + ', "Summoner6":' + self.summoner6.to_string() \
+        res = '{ "matchId":"' + self.match_id + '", "Summoner1":' + self.summoner1.to_string() + ', "Summoner2":' \
+              + self.summoner2.to_string() + ', "Summoner3":' + self.summoner3.to_string() + ', "Summoner4":' \
+              + self.summoner4.to_string() + ', "Summoner5":' + self.summoner5.to_string() + ', "Summoner6":' + self.summoner6.to_string() \
                + ', "Summoner7":' + self.summoner7.to_string() + ', "Summoner8":' + self.summoner8.to_string() \
                + ', "Summoner9":' + self.summoner9.to_string() + ', "Summoner10":' + self.summoner10.to_string() \
                + ', "wins":' + str(self.win) + "}"
