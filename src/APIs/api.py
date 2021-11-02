@@ -9,7 +9,7 @@ url_euw1 = "https://euw1.api.riotgames.com"
 key = "RGAPI-e91be27c-c547-4f3e-ab2a-3d602e845ef7"  # private key
 # key = "RGAPI-0d9039f8-ef59-415b-9162-72bbcec454f7"
 file_src = "../Model/matches.csv"  # training data
-amount_matches = 5
+amount_matches = 50
 
 
 def wait_exceeded():
@@ -36,6 +36,7 @@ def http_call(url, api):
 
 
 def match_to_csv(new_data):
+    print(new_data)
     old_data = None
     try:
         old_data = pd.read_csv(file_src)
@@ -69,21 +70,27 @@ def load_match(match_id, puu_id):
 def get_summoner(puu_id):
     r = http_call(url_europe, "/lol/match/v5/matches/by-puuid/" + puu_id + "/ids?start=0&count=" + str(amount_matches))
     if r is not None:
-        r = http_call(url_europe, "/lol/match/v5/matches/by-puuid/" + puu_id + "/ids?start=0&count=" + str(amount_matches))
         match_ids = r.json()
         summoner_matches = []
         for ma in match_ids:
+            print(ma)
             r = http_call(url_europe, "/lol/match/v5/matches/" + str(ma))
             stats = None
             if r is not None:
                 for p in r.json()["info"]["participants"]:
                     if p["puuid"] == puu_id:
                         stats = p
-                summoner_matches.append(data.SummonerMatch(puu_id, r.json()["info"]["gameDuration"], stats))
-                return summoner_matches
+                if stats is None:
+                    stats = '"None"'
+                game_duration = r.json()["info"]["gameDuration"]
+                if game_duration is None:
+                    game_duration = '"None"'
+                summoner_matches.append(data.SummonerMatch(puu_id, game_duration, stats))
             else:
                 print("retry loading summoner_match : " + str(ma) + "; " + puu_id)
-                return get_summoner(puu_id)
+        if summoner_matches is None:
+            summoner_matches = '"None"'
+        return summoner_matches
     else:
         print("retry loading match_history : " + puu_id)
         return get_summoner(puu_id)
