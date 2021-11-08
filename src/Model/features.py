@@ -1,13 +1,12 @@
 import pandas as pd
+from src.Model.file_writer import write
 
 
-def create_features_1(df):
+def create_features_1(df, features):
     pd.set_option('display.max_columns', None)
     match_df = df[['matchId', "game_result"]]
     # array with selected game stats
-    # avg_features = ['kills']
-    avg_features = ['kills', 'deaths', 'assists', 'damageDealtToObjectives', 'dragonKills', 'goldEarned',
-                    'totalDamageDealt', 'turretKills', 'visionScore', 'win']
+    avg_features = features
 
     # calculate features in feature_df
     feature_df = pd.DataFrame()
@@ -44,21 +43,20 @@ def create_features_1(df):
         feature_result_df.insert(1, avg_feature, feature_df[avg_feature])
         #feature_result_df[avg_feature] = feature_df[avg_feature]
 
-    print('\n-------------------- features dataframe (1) --------------------\n')
+
+    write('\n-------------------- features dataframe (1) --------------------\n')
     result_df = match_df.merge(feature_result_df, on='matchId', how='inner')
     result_df.to_csv('../Data/features_1.csv')
-    print(result_df.columns)
-    print(result_df.head())
-    # pd.merge([match_df, feature_result_df],  how='left', left_on=['matchId'], right_on=['matchId'])
+    write(result_df.columns)
+    write(' \n')
+    # write(result_df.head())
     # return result_df
 
-def create_features_2(df):
+def create_features_2(df, features):
     pd.set_option('display.max_columns', None)
     match_df = df[['matchId', "game_result"]]
     # array with selected game stats
-    # avg_features = ['kills']
-    avg_features = ['kills', 'deaths', 'assists', 'damageDealtToObjectives', 'dragonKills', 'goldEarned',
-                    'totalDamageDealt', 'turretKills', 'visionScore', 'win']
+    avg_features = features
 
     # calculate features in feature_df
     feature_df = pd.DataFrame()
@@ -95,11 +93,11 @@ def create_features_2(df):
         feature_result_df.insert(1, avg_feature, feature_df[avg_feature])
         #feature_result_df[avg_feature] = feature_df[avg_feature]
 
-    print('\n-------------------- features dataframe (2) --------------------\n')
+
+    write('\n-------------------- features dataframe (2) --------------------\n')
     result_df = match_df.merge(feature_result_df, on='matchId', how='inner')
     result_df.to_csv('../Data/features_2.csv')
-    print(result_df.columns)
-    print(result_df.head())
-    # pd.merge([match_df, feature_result_df],  how='left', left_on=['matchId'], right_on=['matchId'])
+    write(result_df.columns)
+    write('\n')
+    # write(result_df.head())
     # return result_df
-

@@ -1,8 +1,9 @@
 import json
 import pandas as pd
+from src.Model.file_writer import write
 
 
-def process_data(df):
+def process_data(df, features):
     pd.set_option('display.max_columns', None)
 
     # create matches_df, game_result = 1 => blue team wins
@@ -19,7 +20,6 @@ def process_data(df):
     matches_df = matches_df.drop('wins', 1)
 
     # create summoner dataframes
-    print('\n')
     summoner_1 = df[['matchId', 'Summoner1.match_history']]
     summoner_2 = df[['matchId', 'Summoner2.match_history']]
     summoner_3 = df[['matchId', 'Summoner3.match_history']]
@@ -32,8 +32,7 @@ def process_data(df):
     summoner_10 = df[['matchId', 'Summoner10.match_history']]
 
     # array with selected game stats
-    avg_features = ['kills', 'deaths', 'assists', 'damageDealtToObjectives', 'dragonKills', 'goldEarned',
-                    'totalDamageDealt', 'turretKills', 'visionScore', 'win']
+    avg_features = features
 
     # create avg features for each summoner (player)
     summoner_1 = create_avg_features(summoner_1, '1', avg_features)
@@ -60,10 +59,10 @@ def process_data(df):
     matches_df = pd.merge(matches_df, summoner_10, on='matchId', how='inner')
 
     # write csv file
-    print('\n-------------------- result dataframe --------------------\n')
-    print(matches_df.columns)
-    # print('\n'+matches_df.head())
+    write('-------------------- result dataframe --------------------\n')
     matches_df.to_csv('../Data/result_data_model.csv')
+    write(matches_df.columns)
+    # write(matches_df.head())
     return matches_df
 
 
