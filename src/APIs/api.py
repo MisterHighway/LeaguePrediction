@@ -8,7 +8,7 @@ url_europe = "https://europe.api.riotgames.com"
 url_euw1 = "https://euw1.api.riotgames.com"
 # key = "RGAPI-8babd049-cc39-420f-a612-5a04b527a8f6"  # private key
 key = "RGAPI-0d9039f8-ef59-415b-9162-72bbcec454f7"
-file_src = "../Data/matches2.csv"  # training data
+file_src = "../Data/matches4.csv"  # training data
 amount_matches = 50
 
 
@@ -109,4 +109,6 @@ def load_summoner_history(summoner_name):
         load_summoner_history(summoner_name)
 
 
-load_summoner_history("Agurin")
+load_summoner_history("Razørk Activoo")
+file_src = "../Data/matches5.csv"  # training data
+load_summoner_history("Raiden Shogun C2")
