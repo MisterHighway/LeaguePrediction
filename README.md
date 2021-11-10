@@ -32,3 +32,4 @@ Berechnung der Features:
 # 1.5 Training der Modelle zur Vorhersage
 Im Python-Skript „model_training“ werden verschiedene Klassifizierungsalgorithmen trainiert. Als Eingabe werden für die Funktionen die zuvor berechneten Features und Spielergebnisse übergeben.
 
+
