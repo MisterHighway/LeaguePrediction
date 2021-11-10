@@ -1,4 +1,4 @@
-from model.model_training import load_model
+from src.model.model_training import load_model
 
 model = load_model("random_forest")
 
@@ -18,8 +18,8 @@ while not loader_chosen:
 print(loader)
 
 if loader == "csv":
-    print("Bitte die Match Id eingeben.")
-    match_id = input()
+    print("Bitte den absoluten Pfad der csv eingeben.")
+    csv_src = input()
     # csv zeile mit match Id suchen und starten
 else:
     print("Bitte den Summoner Namen eingeben.")

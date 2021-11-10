@@ -7,8 +7,8 @@ import src.model.data_model as data
 url_europe = "https://europe.api.riotgames.com"
 url_euw1 = "https://euw1.api.riotgames.com"
 key = "RGAPI-0d9039f8-ef59-415b-9162-72bbcec454f7"
-file = "./data/temp_match.csv"  # for loading temporary matches
-# file = "./data/matches6.csv"  # for storing matches
+file = "../tmp/temp_match.csv"  # for loading temporary matches
+# file = "../data/matches6.csv"  # for storing matches
 
 
 def wait_exceeded():
