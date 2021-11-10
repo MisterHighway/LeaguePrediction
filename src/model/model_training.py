@@ -4,7 +4,7 @@ from sklearn.metrics import mean_absolute_error, accuracy_score, classification_
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from file_writer import write
+from model.file_writer import write
 
 
 def train_model(df, classifier):
@@ -56,8 +56,8 @@ def train_model(df, classifier):
 
 
 def save_model(model, name):
-    dump(model, './trained_models/'+name +'.joblib')
+    dump(model, '../model/trained_models/' + name + '.joblib')
 
 
 def load_model(name):
-    return load('./trained_models/'+name+'.joblib')
+    return load('../model/trained_models/' + name + '.joblib')

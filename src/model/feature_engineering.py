@@ -1,8 +1,8 @@
 import pandas as pd
-from data_processing import process_data
-from features import create_features_1, create_features_2
-from file_writer import write, read_log
-from model_training import train_model, save_model
+from model.data_processing import process_data
+from model.features import create_features_1, create_features_2
+from model.file_writer import write, read_log
+from model.model_training import train_model, save_model
 
 # select in game statistics features
 features = ['kills', 'deaths', 'assists', 'damageDealtToObjectives', 'dragonKills', 'goldEarned',

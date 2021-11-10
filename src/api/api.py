@@ -6,11 +6,9 @@ import src.model.data_model as data
 
 url_europe = "https://europe.api.riotgames.com"
 url_euw1 = "https://euw1.api.riotgames.com"
-# key = "RGAPI-8babd049-cc39-420f-a612-5a04b527a8f6"  # private key
 key = "RGAPI-0d9039f8-ef59-415b-9162-72bbcec454f7"
-live_file = "../data/live_match.csv"  # live match loaded
-file = "../data/matches6.csv"  # training data
-amount_matches = 5
+file = "./data/temp_match.csv"  # for loading temporary matches
+# file = "./data/matches6.csv"  # for storing matches
 
 
 def wait_exceeded():
@@ -44,14 +42,14 @@ def match_to_csv(new_data, file_src):
     except:
         print("no old data")
     finally:
-        if old_data is not None and "live" not in file_src:
+        if old_data is not None and "temp_match" not in file_src:
             pd.DataFrame(old_data.append(pd.json_normalize(json.loads(new_data)))).to_csv(file_src, index=False)
         else:
             pd.DataFrame(pd.json_normalize(json.loads(new_data))).to_csv(file_src, index=False)
     print(pd.read_csv(file_src))
 
 
-def load_live_match(summoner_name):
+def load_live_match(summoner_name, amount_matches):
     summoner = []
     s = http_call(url_euw1, "/lol/summoner/v4/summoners/by-name/" + str(summoner_name))
     if s is None:
@@ -71,13 +69,13 @@ def load_live_match(summoner_name):
                     summoner.append('"None"')
                 else:
                     puuid = player.json()["puuid"]
-                    summoner.append(data.Summoner(get_summoner(puuid), p["championId"]))
+                    summoner.append(data.Summoner(get_summoner(puuid, amount_matches), p["championId"]))
             match_to_csv(data.Match(match_id, summoner[0], summoner[1], summoner[2], summoner[3], summoner[4],
                                     summoner[5], summoner[6], summoner[7], summoner[8], summoner[9],
-                                    '"None"').to_string(), live_file)
+                                    '"None"').to_string(), file)
 
 
-def load_one_match(summoner_name):
+def load_one_match(summoner_name, amount_matches):
     summoner = []
     s = http_call(url_euw1, "/lol/summoner/v4/summoners/by-name/" + str(summoner_name))
     if s is None:
@@ -98,10 +96,10 @@ def load_one_match(summoner_name):
                     summoner.append('"None"')
                 else:
                     puuid = player.json()["puuid"]
-                    summoner.append(data.Summoner(get_summoner(puuid), p["championId"]))
+                    summoner.append(data.Summoner(get_summoner(puuid, amount_matches), p["championId"]))
             match_to_csv(data.Match(match_id, summoner[0], summoner[1], summoner[2], summoner[3], summoner[4],
                                     summoner[5], summoner[6], summoner[7], summoner[8], summoner[9],
-                                    '"None"').to_string(), live_file)
+                                    '"None"').to_string(), file)
 
 
 # def load_match_from_csv(file_src):
@@ -112,23 +110,23 @@ def load_one_match(summoner_name):
 #     print(lel[0]["game_time"])
 
 
-def load_match(match_id, puu_id):
+def load_match(match_id, puu_id, amount_matches):
     summoner = []
     m = http_call(url_europe, "/lol/match/v5/matches/" + match_id)
     if m is None:
         print("retry load match: " + match_id + "; " + puu_id)
-        return load_match(match_id, puu_id)
+        return load_match(match_id, puu_id, amount_matches)
     else:
         win = str(m.json()["info"]["participants"][0]["win"])
         for p in m.json()["info"]["participants"]:
             print(p["summonerName"])
-            summoner.append(data.Summoner(get_summoner(p["puuid"]), p["championId"]))
+            summoner.append(data.Summoner(get_summoner(p["puuid"], amount_matches), p["championId"]))
 
     match_to_csv(data.Match(match_id, summoner[0], summoner[1], summoner[2], summoner[3], summoner[4],
                             summoner[5], summoner[6], summoner[7], summoner[8], summoner[9], win).to_string(), file)
 
 
-def get_summoner(puu_id):
+def get_summoner(puu_id, amount_matches):
     r = http_call(url_europe, "/lol/match/v5/matches/by-puuid/" + puu_id + "/ids?start=0&count=" + str(amount_matches))
     if r is not None:
         match_ids = r.json()
@@ -153,10 +151,10 @@ def get_summoner(puu_id):
         return summoner_matches
     else:
         print("retry loading match_history : " + puu_id)
-        return get_summoner(puu_id)
+        return get_summoner(puu_id, amount_matches)
 
 
-def load_summoner_history(summoner_name):
+def load_summoner_history(summoner_name, amount_matches):
     r = http_call(url_euw1, "/lol/summoner/v4/summoners/by-name/" + summoner_name)
     if r is not None:
         puuid = r.json()["puuid"]
@@ -165,8 +163,8 @@ def load_summoner_history(summoner_name):
         if r is not None:
             matches = r.json()
             for m in matches:
-                load_match(m, puuid)
+                load_match(m, puuid, amount_matches)
         else:
-            load_summoner_history(summoner_name)
+            load_summoner_history(summoner_name, amount_matches)
     else:
-        load_summoner_history(summoner_name)
+        load_summoner_history(summoner_name, amount_matches)
