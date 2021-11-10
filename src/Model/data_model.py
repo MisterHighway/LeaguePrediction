@@ -44,7 +44,7 @@ class Match:
         self.win = win  # summoner 1-5 game won?
 
     def to_string(self):
-        res = '{ "matchId":"' + self.match_id + '", "Summoner1":' + self.summoner1.to_string() + ', "Summoner2":' \
+        res = '{ "matchId":"' + str(self.match_id) + '", "Summoner1":' + self.summoner1.to_string() + ', "Summoner2":' \
               + self.summoner2.to_string() + ', "Summoner3":' + self.summoner3.to_string() + ', "Summoner4":' \
               + self.summoner4.to_string() + ', "Summoner5":' + self.summoner5.to_string() + ', "Summoner6":' + self.summoner6.to_string() \
                + ', "Summoner7":' + self.summoner7.to_string() + ', "Summoner8":' + self.summoner8.to_string() \
