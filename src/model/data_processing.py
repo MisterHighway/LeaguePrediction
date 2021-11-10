@@ -96,7 +96,7 @@ def create_avg_features(summoner_dataframe, summoner_number, avg_features):
                     # if avg_feature == 'win': print('features_count: '+str(x['in_game_stats'][str(avg_feature)]))
 
             # calculate avg
-            row['summoner_' + summoner_number + '_' + avg_feature + '_avg'] = features_count / (
+            summoner_dataframe.at[index, 'summoner_' + summoner_number + '_' + avg_feature + '_avg'] = features_count / (
                         match_count - none_count)
             # if avg_feature == 'win': print('AVG : ' + str(features_count / (match_count - none_count)))
     return summoner_dataframe.drop('Summoner' + summoner_number + '.match_history', 1)
