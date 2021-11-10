@@ -60,7 +60,7 @@ def process_data(df, features):
 
     # write csv file
     write('-------------------- result dataframe --------------------\n')
-    matches_df.to_csv('../Data/result_data_model.csv')
+    matches_df.to_csv('../data/result_data_model.csv')
     write(matches_df.columns)
     # write(matches_df.head())
     return matches_df

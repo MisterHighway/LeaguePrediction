@@ -46,7 +46,7 @@ def create_features_1(df, features):
 
     write('\n-------------------- features dataframe (1) --------------------\n')
     result_df = match_df.merge(feature_result_df, on='matchId', how='inner')
-    result_df.to_csv('../Data/features_1.csv')
+    result_df.to_csv('../data/features_1.csv')
     write(result_df.columns)
     write(' \n')
     # write(result_df.head())
@@ -96,7 +96,7 @@ def create_features_2(df, features):
 
     write('\n-------------------- features dataframe (2) --------------------\n')
     result_df = match_df.merge(feature_result_df, on='matchId', how='inner')
-    result_df.to_csv('../Data/features_2.csv')
+    result_df.to_csv('../data/features_2.csv')
     write(result_df.columns)
     write('\n')
     # write(result_df.head())

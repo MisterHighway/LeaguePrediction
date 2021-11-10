@@ -8,8 +8,8 @@ url_europe = "https://europe.api.riotgames.com"
 url_euw1 = "https://euw1.api.riotgames.com"
 # key = "RGAPI-8babd049-cc39-420f-a612-5a04b527a8f6"  # private key
 key = "RGAPI-0d9039f8-ef59-415b-9162-72bbcec454f7"
-live_file = "../Data/live_match.csv"  # live match loaded
-file = "../Data/matches6.csv"  # training data
+live_file = "../data/live_match.csv"  # live match loaded
+file = "../data/matches6.csv"  # training data
 amount_matches = 5
 
 

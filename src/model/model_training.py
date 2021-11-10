@@ -56,8 +56,8 @@ def train_model(df, classifier):
 
 
 def save_model(model, name):
-    dump(model, name + '.joblib')
+    dump(model, './trained_models/'+name +'.joblib')
 
 
 def load_model(name):
-    return load(name + '.joblib')
+    return load('./trained_models/'+name+'.joblib')
