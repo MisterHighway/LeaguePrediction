@@ -1,8 +1,8 @@
 import pandas as pd
-from model.data_processing import process_data
-from model.features import create_features_1, create_features_2
-from model.file_writer import write, read_log
-from model.model_training import train_model, save_model
+from src.model.data_processing import process_data
+from src.model.features import create_features_1, create_features_2
+from src.model.file_writer import write, read_log
+from src.model.model_training import train_model, save_model
 
 # select in game statistics features
 features = ['kills', 'deaths', 'assists', 'damageDealtToObjectives', 'dragonKills', 'goldEarned',
@@ -28,9 +28,9 @@ create_features_1(result_data_model, features)
 create_features_2(result_data_model, features)
 
 # train prediction model
-model_1 = train_model(pd.read_csv('../data/features_1.csv'), 1)
+model_1 = train_model(pd.read_csv('../tmp/features_1.csv'), 1)
 save_model(model_1, 'random_forest')
-model_2 = train_model(pd.read_csv('../data/features_2.csv'), 2)
+model_2 = train_model(pd.read_csv('../tmp/features_1.csv'), 2)
 save_model(model_1, 'decision_tree')
 
 # model_2 = train_model(pd.read_csv('../data/features_2.csv'), 3)

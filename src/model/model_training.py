@@ -1,10 +1,14 @@
+import pandas as pd
 from joblib import dump, load
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, accuracy_score, classification_report
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from model.file_writer import write
+
+from src.model.features import create_features_1
+from src.model.file_writer import write
+from src.model.data_processing import process_data
 
 
 def train_model(df, classifier):
@@ -56,8 +60,28 @@ def train_model(df, classifier):
 
 
 def save_model(model, name):
-    dump(model, '../model/trained_models/' + name + '.joblib')
+    dump(model, './trained_models/' + name + '.joblib')
 
 
 def load_model(name):
-    return load('../model/trained_models/' + name + '.joblib')
+    return load('./trained_models/' + name + '.joblib')
+
+
+def predict_with_model(model, csv_path):
+
+    # select features
+    features = ['kills', 'deaths', 'assists', 'damageDealtToObjectives', 'dragonKills', 'goldEarned',
+                'totalDamageDealt', 'turretKills', 'visionScore', 'win']
+
+    # read and process data of match
+    match_df = pd.read_csv(csv_path)
+    processed_match_df = process_data(match_df, features)
+
+    # create features (1)
+    create_features_1(processed_match_df, features)
+    features_1 = pd.read_csv('../tmp/features_1.csv')
+    feature_result = features_1.drop(['matchId', 'game_result'], axis=1, inplace=True)
+
+    # return prediction on input features
+    print(model.predict(feature_result))
+    return model.predict(feature_result)

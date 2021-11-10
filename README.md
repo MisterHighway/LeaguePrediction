@@ -5,7 +5,8 @@ Hausarbeit im Wahlpflichtmodul Applications in Data Science
 # 1 Beschreibung der Skripte
 Im Folgenden werden die in Python geschriebenen Skripte des League Prediction Projekts beschrieben. 
 
-# 1.1 Klassen 
+# 1.1 Klassen
+Im Skript „data_model“ befinden sich die Klassen der von der API angefragten Objekte 
 
 # 1.2 API-Anfrage
 
@@ -31,5 +32,9 @@ Berechnung der Features:
 
 # 1.5 Training der Modelle zur Vorhersage
 Im Python-Skript „model_training“ werden verschiedene Klassifizierungsalgorithmen trainiert. Als Eingabe werden für die Funktionen die zuvor berechneten Features und Spielergebnisse übergeben.
+
+# Installationsanweisung
+Für die Applikation sollte anaconda installiert sein (pandas, sklearn & joblib). Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
+
 
 
