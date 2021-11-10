@@ -1,5 +1,5 @@
 import pandas as pd
-from src.Model.file_writer import write
+from file_writer import write
 
 
 def create_features_1(df, features):

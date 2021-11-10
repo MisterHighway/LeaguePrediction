@@ -1,6 +1,6 @@
 import json
 import pandas as pd
-from src.Model.file_writer import write
+from file_writer import write
 
 
 def process_data(df, features):

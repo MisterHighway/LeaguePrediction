@@ -1,9 +1,10 @@
+from joblib import dump, load
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, accuracy_score, classification_report
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from src.Model.file_writer import write
+from file_writer import write
 
 
 def train_model(df, classifier):
@@ -52,3 +53,11 @@ def train_model(df, classifier):
         return prediction_model
     else:
         write('\n---------- prediction_model is none ----------\n')
+
+
+def save_model(model, name):
+    dump(model, name + '.joblib')
+
+
+def load_model(name):
+    return load(name + '.joblib')

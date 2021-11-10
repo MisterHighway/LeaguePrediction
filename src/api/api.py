@@ -2,7 +2,7 @@ import json
 import requests
 import time
 import pandas as pd
-import Model.data_model as data
+import src.model.data_model as data
 
 url_europe = "https://europe.api.riotgames.com"
 url_euw1 = "https://euw1.api.riotgames.com"
@@ -170,6 +170,3 @@ def load_summoner_history(summoner_name):
             load_summoner_history(summoner_name)
     else:
         load_summoner_history(summoner_name)
-
-
-load_match_from_csv(live_file)
