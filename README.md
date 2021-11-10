@@ -9,6 +9,7 @@ Im Folgenden werden die in Python geschriebenen Skripte des League Prediction Pr
 Im Skript „data_model“ befinden sich die Klassen der von der API angefragten Objekte 
 
 # 1.2 API-Anfrage
+Im Skript „apis“ werden über die Funktionen alle Daten aus Web API angefragt und in eine CSV-Datei geschrieben. 
 
 # 1.3 Datenverarbeitung
 Im Python-Skript „data_processing“ befindet sich die Funktion „process_data“. Diese Funktion verarbeitet die Daten, die von der Web API des Herausgebers Riot Games angefragt und in das vorher beschriebene Datenschema verarbeitet wurden. Die übergebenen Daten werden hier im Wesentlichen für die Erstellung der Features vorbereitet. Hierfür wird die Spielhistorie aller Spieler eingelesen. Für die ausgewählten Feature-Kandidaten werden dann Durchschnittswerte pro Spieler über ihre Spielhistorie berechnet. Die Berechnung der Durchschnittswerte erfolgt jedoch präziser ausgedrückt in der ausgelagerten Funktion „create_avg_features“. Mithilfe einer übergebenen Liste können dann beliebig viele In-Game-Durchschnittsstatistiken berechnet werden.
@@ -34,7 +35,7 @@ Berechnung der Features:
 Im Python-Skript „model_training“ werden verschiedene Klassifizierungsalgorithmen trainiert. Als Eingabe werden für die Funktionen die zuvor berechneten Features und Spielergebnisse übergeben.
 
 # Installationsanweisung
-Für die Applikation sollte anaconda installiert sein (pandas, sklearn & joblib). Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
+Für die Applikation sollte Anaconda (für pandas, sklearn & joblib) installiert sein. Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
 
 
 
