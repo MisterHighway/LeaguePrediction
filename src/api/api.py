@@ -49,7 +49,7 @@ def match_to_csv(new_data, file_src):
     print(pd.read_csv(file_src))
 
 
-def load_live_match(summoner_name, amount_matches):
+def load_live_match(summoner_name, amount_matches=5):
     summoner = []
     s = http_call(url_euw1, "/lol/summoner/v4/summoners/by-name/" + str(summoner_name))
     if s is None:

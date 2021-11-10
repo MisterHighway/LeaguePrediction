@@ -60,11 +60,11 @@ def train_model(df, classifier):
 
 
 def save_model(model, name):
-    dump(model, './trained_models/' + name + '.joblib')
+    dump(model, '../model/trained_models/' + name + '.joblib')
 
 
 def load_model(name):
-    return load('./trained_models/' + name + '.joblib')
+    return load('../model/trained_models/' + name + '.joblib')
 
 
 def predict_with_model(model, csv_path):

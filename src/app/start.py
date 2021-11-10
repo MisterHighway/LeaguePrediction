@@ -1,6 +1,11 @@
-from src.model.model_training import load_model
+from api.api import load_live_match
+from src.model.model_training import load_model, predict_with_model
 
 model = load_model("random_forest")
+# model = load_model("decision_tree")
+
+load_live_match("Envy Carry")
+predict_with_model(model, "../tmp/temp_match.csv")
 
 loaders = [{'1': "live"}, {'2': "csv"}, {'3': "history"}]
 loader_chosen = False
@@ -26,4 +31,3 @@ else:
     summoner_name = input()
     # mit summoner_name starten
 
-# predict_with_model(model, "temp_match.csv")
