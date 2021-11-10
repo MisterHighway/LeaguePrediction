@@ -1,4 +1,4 @@
-from api.api import load_live_match
+from src.api.api import load_live_match
 from src.model.model_training import load_model, predict_with_model
 
 model = load_model("random_forest")

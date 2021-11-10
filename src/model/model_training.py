@@ -80,6 +80,7 @@ def predict_with_model(model, csv_path):
     # create features (1)
     create_features_1(processed_match_df, features)
     features_1 = pd.read_csv('../tmp/features_1.csv')
+
     feature_result = features_1.drop(['matchId', 'game_result'], axis=1, inplace=True)
 
     # return prediction on input features
