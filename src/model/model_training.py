@@ -21,13 +21,13 @@ def train_model(df, classifier):
     y = df.game_result
 
     # split into validation and training data
-    train_X, val_X, train_y, val_y = train_test_split(X, y, test_size=0.3, random_state=2)
+    train_X, val_X, train_y, val_y = train_test_split(X, y, test_size=0.35, random_state=2)
 
     # specify model
     prediction_model = None
 
     if classifier == 1:
-        prediction_model = RandomForestClassifier(random_state=3, max_depth=8)
+        prediction_model = RandomForestClassifier(random_state=2)
         write('---------- Random Forest Classifier ----------\n')
     elif classifier == 2:
         prediction_model = DecisionTreeClassifier(random_state=3)
