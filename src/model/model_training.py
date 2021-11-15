@@ -2,6 +2,7 @@ import pandas as pd
 from joblib import dump, load
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, accuracy_score, classification_report
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -20,20 +21,23 @@ def train_model(df, classifier):
     y = df.game_result
 
     # split into validation and training data
-    train_X, val_X, train_y, val_y = train_test_split(X, y, test_size=0.35, random_state=4)
+    train_X, val_X, train_y, val_y = train_test_split(X, y, test_size=0.3, random_state=2)
 
     # specify model
     prediction_model = None
 
     if classifier == 1:
-        prediction_model = RandomForestClassifier(random_state=1)
+        prediction_model = RandomForestClassifier(random_state=3, max_depth=8)
         write('---------- Random Forest Classifier ----------\n')
     elif classifier == 2:
-        prediction_model = DecisionTreeClassifier(random_state=1)
+        prediction_model = DecisionTreeClassifier(random_state=3)
         write('---------- Decision Tree Classifier ----------\n')
     elif classifier == 3:
-        prediction_model = MLPClassifier(random_state=1)
+        prediction_model = MLPClassifier(random_state=3)
         write('---------- MLP Classifier ----------\n')
+    elif classifier == 4:
+        prediction_model = KNeighborsClassifier(n_neighbors=5)
+        write('---------- K Neighbors Classifier ----------\n')
     else:
         print('\n---------- Select Classifier! ----------\n')
 
