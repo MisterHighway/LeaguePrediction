@@ -3,10 +3,16 @@ import requests
 import time
 import pandas as pd
 import src.model.data_model as data
+from dotenv import load_dotenv
+import os
 
 url_europe = "https://europe.api.riotgames.com"
 url_euw1 = "https://euw1.api.riotgames.com"
-key = "RGAPI-0d9039f8-ef59-415b-9162-72bbcec454f7"
+load_dotenv()
+key = os.getenv("API_Key")
+if key is None:
+    key = ""
+
 file = "../tmp/temp_match.csv"  # for loading temporary matches
 
 
