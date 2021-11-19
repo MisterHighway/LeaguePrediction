@@ -3,7 +3,7 @@
 Hausarbeit im Wahlpflichtmodul Applications in Data Science
 
 # 1 Installationsanweisung
-Für die Applikation sollte Anaconda (für pandas, sklearn, joblib, seaborn & matplotlib) installiert sein. Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. In der Datei „.env“ muss anschließend der API Key eingegeben werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
+Für die Applikation sollte Anaconda(für pandas, sklearn, joblib, seaborn & matplotlib), sowie dotenv (pip install python-dotenv) installiert sein. Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. In der Datei „.env“ muss anschließend der API Key eingegeben werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
 
 Zum Ausprobieren können folgende Summoner Namen verwendet werden:
 
