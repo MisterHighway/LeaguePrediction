@@ -48,9 +48,9 @@ model_1 = train_model(pd.read_csv('../tmp/features_1.csv'), 1)  # RandomForestCl
 # save_model(model_1, 'random_forest')
 model_2 = train_model(pd.read_csv('../tmp/features_1.csv'), 2)  # DecisionTreeClassifier
 # save_model(model_2, 'decision_tree')
-model_3 = train_model(pd.read_csv('../tmp/features_1.csv'), 3)  # MLPClassifier
+# model_3 = train_model(pd.read_csv('../tmp/features_1.csv'), 3)  # MLPClassifier
 # save_model(model_3, 'mlp')
-model_4 = train_model(pd.read_csv('../tmp/features_1.csv'), 4)  # KNeighborsClassifier
+# model_4 = train_model(pd.read_csv('../tmp/features_1.csv'), 4)  # KNeighborsClassifier
 # save_model(model_4, 'k_neighbors')
 
 print(read_log())
