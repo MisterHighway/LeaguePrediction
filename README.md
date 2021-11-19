@@ -5,7 +5,7 @@ Hausarbeit im Wahlpflichtmodul Applications in Data Science
 # 1 Installationsanweisung
 Für die Applikation sollte Anaconda(für pandas, sklearn, joblib, seaborn & matplotlib), sowie dotenv (pip install python-dotenv) installiert sein. Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. In der Datei „.env“ muss anschließend der API Key eingegeben werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
 
-Zum Ausprobieren können folgende Summoner Namen verwendet werden:
+Zum Ausprobieren (für letztes und matchid) hier ein paar Summoner Namen:
 
 * Don Noway
 
@@ -17,15 +17,15 @@ Eine Liste von Spielern, die momentan live spielen:
 
 * https://www.trackingthepros.com/players/eu/in-game/
 
-Hierfür muss auf den Namen des Spielers geklickt werden und dann kann der Name kopiert werden.
+Hierfür muss auf den Namen eines Spielers in der Liste geklickt werden, um seine letzten Matches anzuzeigen und dann kann der oberste Name kopiert werden. Sollte der ausgewählte Spieler nicht in einem Spiel sein kann einfach der nächste Spieler probiert werden.
 
 
 # 2 Ergebnisse
-Mit den trainierten Algorithmen konnten keine hohe Accuracy erreicht werden. Die Accuracy bewegte sich im Laufe des Trainings zwischen 45 und 65 Prozent und konnte auch durch optionale Anpassungen nicht erhöht werden. Der Grund dafür liegt sehr wahrscheinlich darin, dass die ausgewählten Features keine hohe Aussagekraft besitzen. Dies lässt sich insbesondere in dem Bild „analyis_features_values“ in dem Ordner „data“ sehen. Die Abbildung zeigt pro Feature ein Koordinatensystem, in dem die Verteilung zwischen dem Feature-Ergebnis und dem Ausgang eines Matches zu sehen ist.
+Mit den trainierten Algorithmen konnten keine hohe Accuracy erreicht werden. Die Accuracy bewegte sich im Laufe des Trainings zwischen 45 und 65 Prozent und konnte auch durch optionale Anpassungen nicht erhöht werden. Der Grund dafür liegt sehr wahrscheinlich darin, dass die ausgewählten Features keine hohe Aussagekraft besitzen. Dies lässt sich insbesondere in dem Bild „analysis_features_values“ in dem Ordner „data“ sehen. Die Abbildung zeigt pro Feature ein Koordinatensystem, in dem die Verteilung zwischen dem Feature-Ergebnis und dem Ausgang eines Matches zu sehen ist.
 
-Als Vorschlag für die Verbesserung der Ergebnisse wäre es sinnvoll, Features mit Bezug auf die ausgewählten Charaktere der Spieler zu entwickeln. Hierfür wäre die Unterscheidung zwischen der allgemeinen Charakter-Performanz unter allen Spielern und die individuelle Performanz eines Spielers sinnvoll. Das Erstellen eines Features bzgl. der allgemeinen Performanz könnte sich jedoch als schwierig erweisen, da über die Web API keine zusammengefassten Statistiken erreichbar sind. 
+Als Vorschlag für die Verbesserung der Ergebnisse wäre es sinnvoll, Features mit Bezug auf die ausgewählten Charaktere der Spieler zu entwickeln. Hierfür wäre die Unterscheidung zwischen der allgemeinen Champion-Performanz unter allen Spielern und die individuelle Performanz eines Spielers sinnvoll. Das Erstellen eines Features bzgl. der allgemeinen Performanz könnte sich jedoch als schwierig erweisen, da über die Web API keine zusammengefassten Statistiken erreichbar sind. 
 
-Es ist zudem anzunehmen, dass eine gute Vorhersage Match-Ergebnisses bei öffentlichen Matches schwierig zu erreichen ist. Demnach wäre ein Fokus auf Matches auf einem hohen Niveau von Vorteil.
+Es ist zudem anzunehmen, dass eine gute Vorhersage des Match-Ergebnisses vorallem wegen äußerer Einflüsse bei öffentlichen Matches schwierig zu erreichen ist. Demnach wäre ein Fokus auf Matches auf einem hohen Niveau oder Professionellen Matches von Vorteil.
 
 # 3 Beschreibung der Skripte
 Im Folgenden werden die in Python geschriebenen Skripte des League Prediction Projekts beschrieben.
@@ -44,18 +44,18 @@ Das Datenmodell sieht wie folgt aus:
 * SummonerMatch, die Details zu einem vergangenem Match eines Summoners 
 
 # 3.2 API-Anfrage
-Im Skript „apis“ werden über die Funktionen alle Daten aus Web API angefragt und in eine CSV-Datei geschrieben. Hierfür gibt es verschiedene Möglichkeiten:
+Im Skript „apis“ werden über die Funktionen alle Daten aus der Web API angefragt und in eine CSV-Datei geschrieben. Hierfür gibt es verschiedene Funktionen:
 
-* Laden eines Live-Matches
+* Laden eines Live-Matches (über Summoner Namen)
 
-* Laden des zuletzt gespielten Matches
+* Laden des zuletzt gespielten Matches (über Summoner Namen)
 
-* Laden eines Matches per matchId
+* Laden eines Matches per identifier (über matchId)
 
 Beim Laden wird als Ergebnis ein Match aus dem definierten Datenmodell geliefert. Dementsprechend werden Bestandteile wie Summoner und SummonerMatches abgefragt.
 
 # 3.3 Datenverarbeitung
-Im Python-Skript „data_processing“ befindet sich die Funktion „process_data“. Diese Funktion verarbeitet die Daten, die von der Web API des Herausgebers Riot Games angefragt und in das vorher beschriebene Datenschema verarbeitet wurden. Die übergebenen Daten werden hier im Wesentlichen für die Erstellung der Features vorbereitet. Hierfür wird die Match-Historie aller Spieler eingelesen. Für die ausgewählten Feature-Kandidaten werden dann Durchschnittswerte pro Spieler über ihre Match-Historie berechnet. Die Berechnung der Durchschnittswerte erfolgt jedoch präziser ausgedrückt in der ausgelagerten Funktion „create_avg_features“. Mithilfe einer übergebenen Liste können dann beliebig viele In-Game-Durchschnittsstatistiken berechnet werden.
+Im Python-Skript „data_processing“ befindet sich die Funktion „process_data“. Diese Funktion verarbeitet die Daten, die von der Web API des Herausgebers Riot Games angefragt und in das vorher beschriebene Datenschema verarbeitet wurden. Die übergebenen Daten werden hier im Wesentlichen für die Erstellung der Features vorbereitet. Hierfür wird die Match-Historie aller Spieler eingelesen. Für die ausgewählten Feature-Kandidaten werden dann Durchschnittswerte pro Spieler über ihre Match-Historie berechnet. Die Berechnung der Durchschnittswerte erfolgt in der ausgelagerten Funktion „create_avg_features“. Mithilfe einer übergebenen Liste können dann beliebig viele In-Game-Durchschnittsstatistiken berechnet werden.
 
 Das Zielschema mit nur einem Feature-Kandidat „assists“ würde wie folgt aussehen: 
 
