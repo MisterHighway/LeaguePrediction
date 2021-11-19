@@ -47,6 +47,8 @@ def match_to_csv(new_data, file_src):
     old_data = None
     try:
         old_data = pd.read_csv(file_src)
+    except:
+        pass
     finally:
         if old_data is not None and "temp_match" not in file_src:
             pd.DataFrame(old_data.append(pd.json_normalize(json.loads(new_data)))).to_csv(file_src, index=False)
