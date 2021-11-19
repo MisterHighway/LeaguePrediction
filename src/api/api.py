@@ -52,7 +52,6 @@ def match_to_csv(new_data, file_src):
             pd.DataFrame(old_data.append(pd.json_normalize(json.loads(new_data)))).to_csv(file_src, index=False)
         else:
             pd.DataFrame(pd.json_normalize(json.loads(new_data))).to_csv(file_src, index=False)
-    print(pd.read_csv(file_src))
 
 
 def load_live_match(summoner_name, amount_matches=5):
