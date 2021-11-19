@@ -5,6 +5,20 @@ Hausarbeit im Wahlpflichtmodul Applications in Data Science
 # 1 Installationsanweisung
 Für die Applikation sollte Anaconda (für pandas, sklearn, joblib, seaborn & matplotlib) installiert sein. Die Datei „matches.rar“ im Ordner „data“ muss dazu entpackt werden. In der Datei „.env“ muss anschließend der API Key eingegeben werden. Damit sollte nun die Applikation im Skript „start“ ausführbar sein.
 
+Zum Ausprobieren können folgende Summoner Namen verwendet werden:
+
+* Don Noway
+
+* noway2u
+
+* Dzukill
+
+Eine Liste von Spielern, die momentan live spielen: 
+
+* https://www.trackingthepros.com/players/eu/in-game/
+
+Hierfür muss auf den Namen des Spielers geklickt werden und dann kann der Name kopiert werden.
+
 
 # 2 Ergebnisse
 Mit den trainierten Algorithmen konnten keine hohe Accuracy erreicht werden. Die Accuracy bewegte sich im Laufe des Trainings zwischen 45 und 65 Prozent und konnte auch durch optionale Anpassungen nicht erhöht werden. Der Grund dafür liegt sehr wahrscheinlich darin, dass die ausgewählten Features keine hohe Aussagekraft besitzen. Dies lässt sich insbesondere in dem Bild „analyis_features_values“ in dem Ordner „data“ sehen. Die Abbildung zeigt pro Feature ein Koordinatensystem, in dem die Verteilung zwischen dem Feature-Ergebnis und dem Ausgang eines Matches zu sehen ist.
