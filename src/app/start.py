@@ -2,7 +2,6 @@ from src.api.api import load_live_match, load_one_match, load_match, load_summon
 from src.model.model_training import load_model, predict_with_model
 
 model = load_model("random_forest")
-# model = load_model("decision_tree")
 
 loaders = [{'1': "live"}, {'2': "csv"}, {'3': "letztes"}, {'4': "match id"}]
 loader_chosen = False
@@ -36,7 +35,6 @@ while not matches_chosen:
 
 if loader == "csv":
     print("Bitte den Namen einer Match Datei im Ordner tmp eingeben.")
-    # noch ma gucken, woher die matches kommen sollen
     csv_src = input()
     print("Vorhersage für Sieg von Team "+str(2-predict_with_model(model, csv_src)[0]))
 else:
